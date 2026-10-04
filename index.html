@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lav Clothing – T-Shirts</title>
+<style>
+:root{--bg:#fafaf7;--ink:#16161a;--mute:#6b6b76;--card:#fff;--line:#e8e8e2;--accent:#16a34a;--brand:#111;--warn:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+button{font:inherit;cursor:pointer;border:0}
+.bar{background:var(--brand);color:#fff;text-align:center;font-size:14px;padding:9px 12px;font-weight:600;letter-spacing:.2px}
+.bar span{margin:0 10px;white-space:nowrap}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;max-width:1150px;margin:auto}
+.logo{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.logo b{color:var(--accent)}
+.chat{background:var(--accent);color:#fff;padding:9px 16px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none}
+.hero{max-width:1150px;margin:10px auto 0;padding:40px 20px;text-align:center}
+.hero h1{font-size:clamp(30px,6vw,52px);letter-spacing:-1.5px;line-height:1.1}
+.hero p{color:var(--mute);margin:12px auto 20px;max-width:520px;font-size:17px}
+.badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.badge{background:#e8f7ee;color:#14532d;padding:8px 14px;border-radius:999px;font-weight:600;font-size:14px}
+main{max-width:1150px;margin:auto;padding:10px 20px 60px}
+h2.t{font-size:22px;margin:30px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.08)}
+.pic{aspect-ratio:1/1;background:#f1f1ec;display:flex;align-items:center;justify-content:center;position:relative}
+.pic img,.pic svg{width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;top:10px;left:10px;background:var(--warn);color:#000;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px}
+.tag.out{background:#ef4444;color:#fff}
+.info{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.info h3{font-size:16px}
+.info .d{font-size:13px;color:var(--mute)}
+.price{font-size:20px;font-weight:800}
+.price s{font-size:14px;color:var(--mute);font-weight:400;margin-left:6px}
+.price em{font-style:normal;font-size:13px;color:var(--accent);margin-left:6px;font-weight:700}
+.free{font-size:12.5px;color:#14532d;font-weight:600}
+select,input,textarea{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:10px;width:100%;background:#fff}
+.buy{background:var(--accent);color:#fff;padding:12px;border-radius:12px;font-weight:700;font-size:15px;margin-top:auto;display:flex;gap:8px;align-items:center;justify-content:center}
+.buy:hover{filter:brightness(.93)}
+.buy[disabled]{background:#bbb;cursor:not-allowed}
+.empty{padding:40px;text-align:center;color:var(--mute)}
+footer{border-top:1px solid var(--line);text-align:center;padding:26px 16px;color:var(--mute);font-size:14px}
+footer a{color:var(--mute);cursor:pointer;text-decoration:underline}
+.fab{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 6px 20px rgba(0,0,0,.25);text-decoration:none;z-index:20}
+/* modals */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-start;justify-content:center;z-index:50;overflow:auto;padding:20px}
+.ov.show{display:flex}
+.box{background:#fff;border-radius:16px;padding:22px;width:100%;max-width:420px;margin:auto}
+.box.wide{max-width:860px;margin-top:10px}
+.box h3{margin-bottom:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>*{flex:1;min-width:140px}
+label{font-size:13px;font-weight:600;color:var(--mute);display:block;margin:10px 0 4px}
+.btn{padding:10px 16px;border-radius:10px;font-weight:600;background:var(--brand);color:#fff}
+.btn.g{background:var(--accent)}.btn.r{background:#ef4444}.btn.l{background:#eee;color:#111}
+.err{color:#ef4444;font-size:14px;min-height:20px;margin-top:6px}
+.sec{border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+.plist .it{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:10px 0}
+.plist .th{width:54px;height:54px;border-radius:8px;overflow:hidden;background:#f1f1ec;flex:none}
+.plist .th img,.plist .th svg{width:100%;height:100%;object-fit:cover}
+.plist .n{flex:1;font-size:14px}
+.note{background:#fff8e1;border:1px solid #ffe08a;padding:10px 12px;border-radius:10px;font-size:13px;margin:10px 0}
+</style>
+</head>
+<body>
+
+<div class="bar"><span>🚚 No Delivery Charge</span><span>💵 Cash on Delivery Available</span></div>
+
+<header>
+  <div class="logo" id="logo"></div>
+  <a class="chat" id="chatTop" target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+</header>
+
+<section class="hero">
+  <h1>Premium T-Shirts,<br>Delivered to Your Door</h1>
+  <p>Order in one tap on WhatsApp. Pay when you receive it.</p>
+  <div class="badges">
+    <div class="badge">✅ No Delivery Charge</div>
+    <div class="badge">✅ Cash on Delivery</div>
+    <div class="badge">✅ Order on WhatsApp</div>
+  </div>
+</section>
+
+<main>
+  <h2 class="t">Our T-Shirts</h2>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <div>© <span id="yr"></span> <span id="fname"></span> • No Delivery Charge • COD Available</div>
+  <div style="margin-top:6px"><a id="adminLink">Admin</a></div>
+</footer>
+
+<a class="fab" id="fab" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
+
+<!-- Login -->
+<div class="ov" id="loginOv">
+  <div class="box">
+    <h3>🔐 Admin Login</h3>
+    <label>Password</label>
+    <input type="password" id="pw" placeholder="Enter admin password">
+    <div class="err" id="loginErr"></div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn g" id="loginBtn">Login</button>
+      <button class="btn l" id="loginCancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Panel -->
+<div class="ov" id="adminOv">
+  <div class="box wide">
+    <div class="row" style="align-items:center;justify-content:space-between">
+      <h3 style="margin:0">⚙️ Admin Panel</h3>
+      <div style="flex:none;display:flex;gap:8px">
+        <button class="btn l" id="logoutBtn">Logout / Close</button>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Important:</b> Changes you make here are saved in <u>this browser</u> only. To make them live for customers,
+      click <b>“Download updated website”</b> below and upload the new file in place of your old one on your hosting.
+    </div>
+
+    <div class="sec">
+      <b>Store Settings</b>
+      <div class="row">
+        <div><label>WhatsApp number (with country code, digits only)</label><input id="sWa" placeholder="919876543210"></div>
+        <div><label>Store name</label><input id="sName"></div>
+      </div>
+      <button class="btn g" style="margin-top:12px" id="saveSet">Save Settings</button>
+    </div>
+
+    <div class="sec">
+      <b id="formTitle">Add New T-Shirt</b>
+      <input type="hidden" id="pId">
+      <div class="row">
+        <div><label>Name</label><input id="pName" placeholder="Classic Black Tee"></div>
+        <div><label>Price (₹)</label><input id="pPrice" type="number" min="0"></div>
+        <div><label>Old price (₹, optional)</label><input id="pMrp" type="number" min="0"></div>
+      </div>
+      <div class="row">
+        <div><label>Sizes (comma separated)</label><input id="pSizes" value="S,M,L,XL"></div>
+        <div><label>Shirt color (used if no photo)</label><input id="pColor" type="color" value="#111111" style="height:42px;padding:4px"></div>
+        <div><label>Availability</label><select id="pStock"><option value="1">In stock</option><option value="0">Out of stock</option></select></div>
+      </div>
+      <label>Short description</label>
+      <input id="pDesc" placeholder="100% cotton, regular fit">
+      <label>Photo (upload or paste image link)</label>
+      <div class="row">
+        <input type="file" id="pFile" accept="image/*">
+        <input id="pImg" placeholder="https://... (optional)">
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn g" id="savePrd">Save T-Shirt</button>
+        <button class="btn l" id="clearPrd">Clear form</button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <b>Your T-Shirts</b>
+      <div class="plist" id="plist"></div>
+    </div>
+
+    <div class="row">
+      <button class="btn g" id="dlBtn">⬇️ Download updated website</button>
+      <button class="btn r" id="resetBtn">Reset my local changes</button>
+    </div>
+  </div>
+</div>
+
+<script id="site-data" type="application/json">
+{
+  "updated": 1,
+  "storeName": "Lav Clothing",
+  "whatsapp": "919303740911",
+  "products": [
+    {"id":"p1","name":"Classic Black Tee","price":399,"mrp":699,"color":"#111111","img":"","sizes":["S","M","L","XL"],"stock":true,"desc":"100% cotton, regular fit"},
+    {"id":"p2","name":"Pure White Tee","price":349,"mrp":599,"color":"#f5f5f5","img":"","sizes":["S","M","L","XL"],"stock":true,"desc":"Soft & breathable"},
+    {"id":"p3","name":"Navy Blue Tee","price":399,"mrp":699,"color":"#1e3a8a","img":"","sizes":["M","L","XL"],"stock":true,"desc":"Everyday comfort"},
+    {"id":"p4","name":"Olive Green Tee","price":429,"mrp":749,"color":"#556b2f","img":"","sizes":["S","M","L","XL","XXL"],"stock":true,"desc":"Premium cotton blend"}
+  ]
+}
+</script>
+
+<script>
+(function(){
+  var KEY='tshirt_site_v1';
+  var PASS_B64='bGF2IHNhaHU='; // admin password is checked in the browser
+  var $=function(i){return document.getElementById(i)};
+  var DATA=JSON.parse($('site-data').textContent);
+  var S=DATA;
+  try{var L=JSON.parse(localStorage.getItem(KEY)||'null'); if(L&&L.updated>DATA.updated) S=L;}catch(e){}
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function persist(){S.updated=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){alert('Could not save: browser storage is full. Use a smaller photo.')}}
+  function shirtSvg(c){
+    return '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#f1f1ec"/><path d="M70 30 L40 45 L15 85 L45 100 L55 85 L55 170 L145 170 L145 85 L155 100 L185 85 L160 45 L130 30 Q100 55 70 30Z" fill="'+esc(c||'#111')+'" stroke="rgba(0,0,0,.25)" stroke-width="2"/></svg>';
+  }
+  function picHtml(p){return p.img?'<img loading="lazy" alt="'+esc(p.name)+'" src="'+esc(p.img)+'">':shirtSvg(p.color)}
+  function waLink(text){
+    var n=String(S.whatsapp||'').replace(/\D/g,'');
+    return 'https://wa.me/'+n+(text?'?text='+encodeURIComponent(text):'');
+  }
+
+  function renderPublic(){
+    $('logo').innerHTML=esc(S.storeName).replace(/(\S+)$/,'<b>$1</b>');
+    $('fname').textContent=S.storeName;
+    document.title=S.storeName+' – T-Shirts';
+    $('yr').textContent=new Date().getFullYear();
+    var hi=waLink('Hello! I want to know about your t-shirts.');
+    $('chatTop').href=hi; $('fab').href=hi;
+    var g=$('grid');
+    if(!S.products.length){g.innerHTML='<div class="empty">No t-shirts available right now.</div>';return}
+    g.innerHTML=S.products.map(function(p){
+      var off=p.mrp&&p.mrp>p.price?Math.round((p.mrp-p.price)/p.mrp*100):0;
+      var opts=(p.sizes||[]).map(function(s){return '<option>'+esc(s)+'</option>'}).join('');
+      return '<div class="card"><div class="pic">'+picHtml(p)+
+        (p.stock?(off?'<span class="tag">'+off+'% OFF</span>':''):'<span class="tag out">Out of stock</span>')+'</div>'+
+        '<div class="info"><h3>'+esc(p.name)+'</h3>'+(p.desc?'<div class="d">'+esc(p.desc)+'</div>':'')+
+        '<div class="price">₹'+esc(p.price)+(off?'<s>₹'+esc(p.mrp)+'</s>':'')+'</div>'+
+        '<div class="free">🚚 No delivery charge • 💵 COD available</div>'+
+        '<select data-size="'+esc(p.id)+'" aria-label="Size">'+opts+'</select>'+
+        '<button class="buy" data-buy="'+esc(p.id)+'"'+(p.stock?'':' disabled')+'>💬 Buy Now on WhatsApp</button></div></div>';
+    }).join('');
+  }
+
+  $('grid').addEventListener('click',function(e){
+    var b=e.target.closest('[data-buy]'); if(!b||b.disabled)return;
+    var p=S.products.filter(function(x){return x.id===b.getAttribute('data-buy')})[0]; if(!p)return;
+    var sel=document.querySelector('[data-size="'+p.id+'"]');
+    var size=sel?sel.value:'';
+    var msg='Hello '+S.storeName+'! I want to buy this T-shirt:\n\n'+
+      '*'+p.name+'*\nSize: '+size+'\nPrice: ₹'+p.price+'\n(Free delivery, Cash on Delivery)\n\n'+
+      'My name:\nMy full address:\nPincode:';
+    window.open(waLink(msg),'_blank');
+  });
+
+  /* ---------- Admin ---------- */
+  var authed=false;
+  function show(id,v){$(id).classList.toggle('show',v)}
+  $('adminLink').onclick=function(){ if(authed){openAdmin()} else {$('pw').value='';$('loginErr').textContent='';show('loginOv',true);setTimeout(function(){$('pw').focus()},50)} };
+  $('loginCancel').onclick=function(){show('loginOv',false)};
+  function doLogin(){
+    if(btoa($('pw').value)===PASS_B64){authed=true;show('loginOv',false);openAdmin()}
+    else $('loginErr').textContent='Wrong password.';
+  }
+  $('loginBtn').onclick=doLogin;
+  $('pw').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
+  $('logoutBtn').onclick=function(){authed=false;show('adminOv',false)};
+
+  function openAdmin(){
+    $('sWa').value=S.whatsapp; $('sName').value=S.storeName;
+    clearForm(); renderList(); show('adminOv',true);
+  }
+  $('saveSet').onclick=function(){
+    var n=$('sWa').value.replace(/\D/g,'');
+    if(n.length<10){alert('Enter a valid WhatsApp number with country code, e.g. 919876543210');return}
+    S.whatsapp=n; S.storeName=$('sName').value.trim()||'My Store';
+    persist(); renderPublic(); alert('Settings saved.');
+  };
+
+  function clearForm(){
+    $('pId').value='';$('pName').value='';$('pPrice').value='';$('pMrp').value='';
+    $('pSizes').value='S,M,L,XL';$('pColor').value='#111111';$('pStock').value='1';
+    $('pDesc').value='';$('pImg').value='';$('pFile').value='';$('formTitle').textContent='Add New T-Shirt';
+  }
+  $('clearPrd').onclick=clearForm;
+
+  $('pFile').onchange=function(){
+    var f=this.files[0]; if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      var im=new Image();
+      im.onload=function(){
+        var m=700,w=im.width,h=im.height,k=Math.min(1,m/Math.max(w,h));
+        var c=document.createElement('canvas');c.width=Math.round(w*k);c.height=Math.round(h*k);
+        c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+        $('pImg').value=c.toDataURL('image/jpeg',.8);
+      };
+      im.src=r.result;
+    };
+    r.readAsDataURL(f);
+  };
+
+  $('savePrd').onclick=function(){
+    var name=$('pName').value.trim(), price=parseInt($('pPrice').value,10);
+    if(!name||!(price>=0)){alert('Please enter the name and price.');return}
+    var p={
+      id:$('pId').value||('p'+Date.now()),
+      name:name,price:price,mrp:parseInt($('pMrp').value,10)||0,
+      color:$('pColor').value,img:$('pImg').value.trim(),
+      sizes:$('pSizes').value.split(',').map(function(s){return s.trim()}).filter(Boolean),
+      stock:$('pStock').value==='1',desc:$('pDesc').value.trim()
+    };
+    var i=S.products.findIndex(function(x){return x.id===p.id});
+    if(i>=0)S.products[i]=p; else S.products.push(p);
+    persist(); clearForm(); renderList(); renderPublic();
+  };
+
+  function renderList(){
+    var l=$('plist');
+    if(!S.products.length){l.innerHTML='<div class="empty">No products yet.</div>';return}
+    l.innerHTML=S.products.map(function(p){
+      return '<div class="it"><div class="th">'+picHtml(p)+'</div><div class="n"><b>'+esc(p.name)+'</b><br>₹'+esc(p.price)+' • '+(p.stock?'In stock':'Out of stock')+'</div>'+
+        '<button class="btn l" data-edit="'+esc(p.id)+'">Edit</button><button class="btn r" data-del="'+esc(p.id)+'">Delete</button></div>';
+    }).join('');
+  }
+  $('plist').addEventListener('click',function(e){
+    var ed=e.target.getAttribute('data-edit'), dl=e.target.getAttribute('data-del');
+    if(ed){
+      var p=S.products.filter(function(x){return x.id===ed})[0]; if(!p)return;
+      $('pId').value=p.id;$('pName').value=p.name;$('pPrice').value=p.price;$('pMrp').value=p.mrp||'';
+      $('pSizes').value=(p.sizes||[]).join(',');$('pColor').value=p.color||'#111111';
+      $('pStock').value=p.stock?'1':'0';$('pDesc').value=p.desc||'';$('pImg').value=p.img||'';
+      $('formTitle').textContent='Edit T-Shirt';
+      $('formTitle').scrollIntoView({behavior:'smooth',block:'center'});
+    }
+    if(dl && confirm('Delete this t-shirt?')){
+      S.products=S.products.filter(function(x){return x.id!==dl});
+      persist();renderList();renderPublic();
+    }
+  });
+
+  $('resetBtn').onclick=function(){
+    if(confirm('Remove changes saved in this browser and go back to the website file’s data?')){
+      localStorage.removeItem(KEY);location.reload();
+    }
+  };
+
+  $('dlBtn').onclick=function(){
+    S.updated=Math.max(Date.now(),(S.updated||0));
+    var clone=document.documentElement.cloneNode(true);
+    clone.querySelector('#site-data').textContent='\n'+JSON.stringify(S,null,2)+'\n';
+    clone.querySelector('#grid').innerHTML='';
+    clone.querySelector('#plist').innerHTML='';
+    ['loginOv','adminOv'].forEach(function(id){clone.querySelector('#'+id).classList.remove('show')});
+    var html='<!DOCTYPE html>\n'+clone.outerHTML;
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));
+    a.download='index.html';document.body.appendChild(a);a.click();a.remove();
+  };
+
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')show('loginOv',false)});
+  renderPublic();
+})();
+</script>
+</body>
+</html>
